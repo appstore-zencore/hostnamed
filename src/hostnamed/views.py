@@ -12,7 +12,7 @@ from .utils import get_query_code
 
 
 def update(request):
-    hostname = request.GET.get("hostname", "")
+    hostname = request.GET.get("hostname", "").upper()
     ip = request.GET.get("ip", "")
     timestamp = request.GET.get("timestamp", "")
     code = request.GET.get("code", "")
@@ -37,7 +37,7 @@ def update(request):
 
 
 def query(request):
-    hostname = request.GET.get("hostname", "")
+    hostname = request.GET.get("hostname", "").upper()
     timestamp = request.GET.get("timestamp", "")
     code = request.GET.get("code", "")
 

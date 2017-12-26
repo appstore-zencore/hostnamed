@@ -18,6 +18,7 @@ class Host(models.Model):
         return self.hostname
 
     def save(self, *args, **kwargs):
+        self.hostname = self.hostname.upper()
         if not self.update_key:
             self.update_key = str(uuid.uuid4())
         super(Host, self).save(*args, **kwargs)

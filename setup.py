@@ -17,7 +17,7 @@ requires = [
 
 setup(
     name="hostnamed",
-    version="0.1.3",
+    version="0.1.4",
     description="Dynamic hostname manage and update.",
     long_description=long_description,
     url="https://github.com/appstore-zencore/hostnamed",

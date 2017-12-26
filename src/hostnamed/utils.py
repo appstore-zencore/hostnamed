@@ -7,11 +7,13 @@ from zencore.utils.system import get_main_ipaddress
 
 
 def get_update_code(hostname, ip, timestamp, key):
+    hostname = hostname.upper()
     text = "hostname={}&ip={}&timestamp={}&key={}".format(hostname, ip, timestamp, key)
     return hashlib.md5(text.encode("utf-8")).hexdigest()
 
 
 def get_query_code(hostname, timestamp, key):
+    hostname = hostname.upper()
     text = "hostname={}&timestamp={}&key={}".format(hostname, timestamp, key)
     return hashlib.md5(text.encode("utf-8")).hexdigest()
 
