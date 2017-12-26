@@ -1,4 +1,6 @@
+#!/usr/bin/env python
 import os
+import urllib
 import yaml
 import click
 import hashlib
@@ -34,7 +36,8 @@ def update(config, hostnames):
         hostnames = list(settings.keys())
     for hostname in hostnames:
         config = settings[hostname]
-        result = client_update(config["server"], hostname, config["update-key"], config["use-local-ip"])
+        update_url = urllib.parse.urljoin(config["server"], "update/")
+        result = client_update(update_url, hostname, config["update-key"], config["use-local-ip"])
         if result:
             print("{} OK".format(hostname))
         else:

@@ -13,8 +13,8 @@ requires = [
 
 setup(
     name="hostnamed",
-    version="3.1.0",
-    description="Django application contain font-awesome static files.",
+    version="0.1.0",
+    description="Dynamic hostname manage and update.",
     long_description=long_description,
     url="https://github.com/appstore-zencore/hostnamed",
     author="zencore",
@@ -34,8 +34,8 @@ setup(
     requires=requires,
     install_requires=requires,
     scripts=[
-        "src/scripts/hostnamed.py",
-        "src/scripts/hostnamed",
+        "src/scripts/hostname-ctrl.py",
+        "src/scripts/hostname-ctrl",
     ],
     zip_safe=False,
     include_package_data=True,
