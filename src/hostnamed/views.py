@@ -1,28 +1,27 @@
+import time
 import hashlib
 from django.http import Http404
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from django.utils.timezone import now
 from zencore.django.request import get_client_ip
 from .models import Host
+from .utils import get_update_code
+from .utils import get_query_code
 
 
 def update(request):
-    hostname = request.GET.get("hostname")
+    hostname = request.GET.get("hostname", "")
     ip = request.GET.get("ip", "")
-    code = request.GET.get("code")
+    code = request.GET.get("code", "")
     client_ip = get_client_ip(request)
 
-    if (not hostname) and (not code):
+    if (not hostname) or (not code):
         raise Http404()
 
-    try:
-        host = Host.objects.get(hostname=hostname)
-    except Host.DoesNotExist:
-        raise Http404()
-
-    raw = "hostname={}&ip={}&key={}".format(host.hostname, ip, host.update_key)
-    real_code = hashlib.md5(raw.encode("utf-8")).hexdigest()
+    host = get_object_or_404(Host, hostname=hostname)
+    real_code = get_update_code(hostname, ip, host.update_key)
     if code != real_code:
         raise Http404()
 
@@ -31,3 +30,22 @@ def update(request):
     host.save()
 
     return HttpResponse("OK")
+
+
+def query(request):
+    hostname = request.GET.get("hostname", "")
+    timestamp = request.GET.get("timestamp", "")
+    code = request.GET.get("code", "")
+
+    if (not hostname) or (not timestamp) or (not code):
+        raise Http404()
+
+    if abs(time.time() - int(timestamp)) > 60:
+        raise Http404()
+
+    host = get_object_or_404(Host, hostname=hostname)
+    real_code = get_query_code(hostname, timestamp, host.key)
+    if real_code != code:
+        raise Http404()
+
+    return HttpResponse(str(host.ip))

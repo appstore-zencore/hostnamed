@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Host(models.Model):
-    hostname = models.CharField(max_length=32, verbose_name=_("Hostname"))
+    hostname = models.CharField(max_length=32, unique=True, verbose_name=_("Hostname"))
     description = models.CharField(max_length=32, null=True, blank=True, verbose_name=_("Description"))
     ip = models.GenericIPAddressField(null=True, blank=True, verbose_name=_("IP Address"))
     update_key = models.CharField(max_length=36, verbose_name=_("Update Key"), blank=True)
