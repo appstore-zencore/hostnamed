@@ -6,9 +6,10 @@ import requests
 from zencore.utils.system import get_main_ipaddress
 
 
-def get_update_code(hostname, ip, key):
-    text = "hostname={}&ip={}&key={}".format(hostname, ip, key)
+def get_update_code(hostname, ip, timestamp, key):
+    text = "hostname={}&ip={}&timestamp={}&key={}".format(hostname, ip, timestamp, key)
     return hashlib.md5(text.encode("utf-8")).hexdigest()
+
 
 def get_query_code(hostname, timestamp, key):
     text = "hostname={}&timestamp={}&key={}".format(hostname, timestamp, key)
@@ -16,11 +17,13 @@ def get_query_code(hostname, timestamp, key):
 
 
 def client_update(server, hostname, key, use_local_ip=False):
+    timestamp = int(time.time())
     ip = use_local_ip and get_main_ipaddress() or ""
     params = {
         "hostname": hostname,
         "ip": ip,
-        "code": get_update_code(hostname, ip, key),
+        "timestamp": timestamp,
+        "code": get_update_code(hostname, ip, timestamp, key),
     }
     response = requests.get(server, params=params)
     if response.status_code == 200:

@@ -14,10 +14,14 @@ from .utils import get_query_code
 def update(request):
     hostname = request.GET.get("hostname", "")
     ip = request.GET.get("ip", "")
+    timestamp = request.GET.get("timestamp", "")
     code = request.GET.get("code", "")
     client_ip = get_client_ip(request)
 
-    if (not hostname) or (not code):
+    if (not hostname) or (not code) or (not timestamp):
+        raise Http404()
+
+    if abs(time.time() - int(timestamp)) > 60:
         raise Http404()
 
     host = get_object_or_404(Host, hostname=hostname)
