@@ -76,6 +76,10 @@ def input_config():
         update_key = input("Update key: ")
     while not use_local_ip in ("y", "n"):
         use_local_ip = input("Use local ip (y/n): ").lower()
+    if use_local_ip == "y":
+        use_local_ip = True
+    else:
+        use_local_ip = False
 
     return {
         hostname: {
