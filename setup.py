@@ -9,11 +9,15 @@ with open(os.path.join(here, 'README.rst'), "r", encoding="utf-8") as fobj:
 
 requires = [
     "django",
+    "zencore_django",
+    "zencore_utils",
+    "click",
+    "requests",
 ]
 
 setup(
     name="hostnamed",
-    version="0.1.1",
+    version="0.1.2",
     description="Dynamic hostname manage and update.",
     long_description=long_description,
     url="https://github.com/appstore-zencore/hostnamed",
