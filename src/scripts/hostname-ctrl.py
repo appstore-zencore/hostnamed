@@ -9,7 +9,7 @@ from hostnamed.utils import load_config
 from hostnamed.utils import input_config
 from hostnamed.utils import save_config
 from hostnamed.utils import client_update
-
+from hostnamed.utils import client_query
 
 @click.group()
 def hostnamed():
@@ -55,5 +55,7 @@ def query(config, hostname):
     config = settings[hostname]
     query_url = urllib.parse.urljoin(config["server"], "query/")
     result = client_query(query_url, hostname, config["key"])
+    print(result)
+
 if __name__ == "__main__":
     hostnamed()

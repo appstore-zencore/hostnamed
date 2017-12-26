@@ -48,7 +48,7 @@ def query(request):
         raise Http404()
 
     host = get_object_or_404(Host, hostname=hostname)
-    real_code = get_query_code(hostname, timestamp, host.key)
+    real_code = get_query_code(hostname, timestamp, host.update_key)
     if real_code != code:
         raise Http404()
 
