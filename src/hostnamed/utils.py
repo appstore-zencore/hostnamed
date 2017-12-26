@@ -71,7 +71,7 @@ def input_config():
     use_local_ip = ""
 
     while not hostname:
-        hostname = input("Hostname: ")
+        hostname = input("Hostname: ").upper()
     while not server:
         server = input("Server: ")
     while not update_key:
