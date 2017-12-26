@@ -80,7 +80,7 @@ def input_config():
     return {
         hostname: {
             "server": server,
-            "update-key": update_key,
+            "key": update_key,
             "use-local-ip": use_local_ip,
         }
     }
