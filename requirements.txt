@@ -1,0 +1,3 @@
+django
+zencore-django
+click
