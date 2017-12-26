@@ -13,7 +13,7 @@ requires = [
 
 setup(
     name="hostnamed",
-    version="2.0.1",
+    version="3.1.0",
     description="Django application contain font-awesome static files.",
     long_description=long_description,
     url="https://github.com/appstore-zencore/hostnamed",
@@ -34,8 +34,8 @@ setup(
     requires=requires,
     install_requires=requires,
     scripts=[
-        "src/scripts/hostnamed-update.py",
-        "src/scripts/hostnamed-update",
+        "src/scripts/hostnamed.py",
+        "src/scripts/hostnamed",
     ],
     zip_safe=False,
     include_package_data=True,
