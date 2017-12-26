@@ -25,7 +25,7 @@ def update(request):
         raise Http404()
 
     host = get_object_or_404(Host, hostname=hostname)
-    real_code = get_update_code(hostname, ip, host.update_key)
+    real_code = get_update_code(hostname, ip, timestamp, host.update_key)
     if code != real_code:
         raise Http404()
 
